@@ -6,6 +6,7 @@ import com.example.reactive.domain.response.Result;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
 
 /**
  * 限流功能
@@ -20,8 +21,8 @@ public class RateLimitController {
      */
     @GetMapping("/byResource")
     @SentinelResource(value = "byResource", blockHandler = "handleException")
-    public Result byResource() {
-        return Result.success("按资源名称限流");
+    public Mono<Result> byResource() {
+        return Mono.just(Result.success("按资源名称限流"));
     }
 
     /**
@@ -29,13 +30,13 @@ public class RateLimitController {
      */
     @GetMapping("/byUrl")
     @SentinelResource(value = "byUrl", blockHandler = "handleException")
-    public Result byUrl() {
-        return Result.success("按url限流");
+    public Mono<Result> byUrl() {
+        return Mono.just(Result.success("按url限流"));
     }
 
 
-    public Result handleException(BlockException exception) {
-        return Result.success(exception.getClass().getCanonicalName());
+    public Mono<Result> handleException(BlockException exception) {
+        return Mono.just(Result.success(exception.getClass().getCanonicalName()));
     }
 
 }

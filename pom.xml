@@ -24,6 +24,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-sleuth</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
         </dependency>
