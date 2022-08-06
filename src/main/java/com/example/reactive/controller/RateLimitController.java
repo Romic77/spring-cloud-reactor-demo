@@ -23,6 +23,7 @@ public class RateLimitController {
     @SentinelResource(value = "byResource", blockHandler = "handleException")
     public Mono<Result> byResource() {
         return Mono.just(Result.success("按资源名称限流"));
+
     }
 
     /**

@@ -7,7 +7,7 @@ spring:
     name: spring-cloud-reactive-demo
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/blogger?useUnicode=yes&characterEncoding=UTF-8&useSSL=false&allowMultiQueries=true&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://127.0.0.1:3306/mysql?useUnicode=yes&characterEncoding=UTF-8&useSSL=false&allowMultiQueries=true&allowPublicKeyRetrieval=true
     username: root
     password: rootroot
   redis:
@@ -34,6 +34,21 @@ spring:
         dashboard: localhost:8080 #配置sentinel dashboard地址
         port: 8719
 
+
+  zipkin:
+    base-url: http://127.0.0.1:9411/ #zipkin 的服务端地址
+    sender:
+      type: web #采集日志向服务端传递的方式，还有mq等其他方式
+  sleuth:
+    sampler:
+      probability: 1 # 采集日志比率 如 0.1
+
+#添加日志级别可以控制台打印节点上的链路信息
+logging:
+  level:
+    root: INFO
+    org.springframework.web.servlet.DispatcherServlet: DEBUG
+    org.springframework.cloud.sleuth: DEBUG
 
 # 监控端点暴露
 management:
